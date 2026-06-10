@@ -1,0 +1,1 @@
+export { IphoneMiniSection } from "./IphoneMiniSection";
