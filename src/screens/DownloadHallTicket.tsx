@@ -57,37 +57,28 @@ export default function DownloadHallTicket(): JSX.Element {
       });
       
       const imageData = canvas.toDataURL("image/png", 1.0);
-      
-      // Convert to blob for compatibility
-      const response = await fetch(imageData);
-      const blob = await response.blob();
       const filename = `Hall_Ticket_${id || "EXIM_Training"}.png`;
-      const file = new File([blob], filename, { type: "image/png" });
 
-      // Try using the native Web Share API (perfect for iPhone/Safari)
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        try {
-          await navigator.share({
-            files: [file],
-            title: "Hall Ticket",
-            text: "Export Import Training Hall Ticket",
-          });
-          return;
-        } catch (shareError) {
-          // If the user cancelled the share sheet, stop
-          if ((shareError as Error).name === "AbortError") {
-            return;
-          }
-          console.error("Share failed, falling back to download:", shareError);
-        }
+      // Check if the device is iOS (iPhone/iPad)
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || 
+                    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+      if (isIOS) {
+        // iPhone specific: Blob URL method triggers native Safari download prompt
+        const response = await fetch(imageData);
+        const blob = await response.blob();
+        const link = document.createElement("a");
+        link.download = filename;
+        link.href = URL.createObjectURL(blob);
+        link.click();
+        setTimeout(() => URL.revokeObjectURL(link.href), 100);
+      } else {
+        // Android and Web desktop: Original direct base64 download method
+        const link = document.createElement("a");
+        link.download = filename;
+        link.href = imageData;
+        link.click();
       }
-
-      // Fallback for desktop or non-sharing browsers
-      const link = document.createElement("a");
-      link.download = filename;
-      link.href = URL.createObjectURL(blob);
-      link.click();
-      URL.revokeObjectURL(link.href);
     } catch (error) {
       console.error("Error capturing the ticket image:", error);
     }
