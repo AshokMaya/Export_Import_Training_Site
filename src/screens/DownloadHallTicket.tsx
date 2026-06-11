@@ -158,19 +158,28 @@ export default function DownloadHallTicket(): JSX.Element {
           <div className="flex flex-col gap-4">
             
             {/* Header section */}
-            <div className="flex flex-col items-center text-center gap-1">
+            <div className="relative flex flex-col items-center text-center gap-1 min-h-[72px] pb-2">
+              {/* Left Side: Joseph Vijay Portrait */}
+              <img
+                src="/joseph-vijay-2.png"
+                alt="Joseph Vijay"
+                className="absolute left-0 bottom-4 w-14 h-18 object-cover"
+              />
+
+              {/* Right Side: Logo Image (Govt Emblem) */}
               <img
                 src="/govt-emblem.svg"
                 alt="govt-emblem"
-                className="w-14 h-14 object-contain"
+                className="absolute right-0 bottom-4 w-16 h-16 object-contain"
               />
+
               <span className="font-bold text-sm md:text-base text-gray-900">
                 தமிழ்நாடு அரசு
               </span>
-              <p className="font-bold text-xs md:text-sm text-gray-800">
+              <p className="font-bold text-xs md:text-sm text-gray-800 max-w-[60%]">
                 தமிழக அரசின் ஏற்றுமதி தொழில் முனைவோருக்கான பயிற்சி திட்டம்
               </p>
-              <p className="text-gray-600 font-bold text-[10px] md:text-xs">
+              <p className="text-gray-600 font-bold text-[10px] md:text-xs max-w-[60%]">
                 முதலமைச்சரின் வீட்டுக்கு ஒரு தொழிலதிபர் திட்டம்
               </p>
               <div className="w-full border-t border-gray-300 mt-1" />
