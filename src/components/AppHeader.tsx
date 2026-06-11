@@ -4,9 +4,9 @@ export const AppHeader = (): JSX.Element => {
       <header className="sticky top-0 z-50 flex items-center justify-between w-full h-14 sm:h-16 bg-white backdrop-blur-[5.9px] backdrop-brightness-[100%] [-webkit-backdrop-filter:blur(5.9px)_brightness(100%)] px-4 sm:px-6 lg:px-8 shadow-sm lg:hidden">
         <div className="flex items-center">
           <img
-            className="w-8 h-10 sm:w-11 sm:h-[55px] object-cover"
+            className="w-12 h-14 sm:w-11 sm:h-[55px] object-cover"
             alt="Joseph Vijay"
-            src="/joseph-vijay-1.png"
+            src="/joseph-vijay-2.png"
           />
         </div>
 

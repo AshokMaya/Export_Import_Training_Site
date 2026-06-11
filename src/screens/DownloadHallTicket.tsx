@@ -56,11 +56,38 @@ export default function DownloadHallTicket(): JSX.Element {
         height: 1100,
       });
       
-      const image = canvas.toDataURL("image/png", 1.0);
+      const imageData = canvas.toDataURL("image/png", 1.0);
+      
+      // Convert to blob for compatibility
+      const response = await fetch(imageData);
+      const blob = await response.blob();
+      const filename = `Hall_Ticket_${id || "EXIM_Training"}.png`;
+      const file = new File([blob], filename, { type: "image/png" });
+
+      // Try using the native Web Share API (perfect for iPhone/Safari)
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({
+            files: [file],
+            title: "Hall Ticket",
+            text: "Export Import Training Hall Ticket",
+          });
+          return;
+        } catch (shareError) {
+          // If the user cancelled the share sheet, stop
+          if ((shareError as Error).name === "AbortError") {
+            return;
+          }
+          console.error("Share failed, falling back to download:", shareError);
+        }
+      }
+
+      // Fallback for desktop or non-sharing browsers
       const link = document.createElement("a");
-      link.download = `Hall_Ticket_${id || "EXIM_Training"}.png`;
-      link.href = image;
+      link.download = filename;
+      link.href = URL.createObjectURL(blob);
       link.click();
+      URL.revokeObjectURL(link.href);
     } catch (error) {
       console.error("Error capturing the ticket image:", error);
     }
