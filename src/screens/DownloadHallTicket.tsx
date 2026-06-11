@@ -10,15 +10,20 @@ export default function DownloadHallTicket(): JSX.Element {
   const ticketRef = useRef<HTMLDivElement>(null);
 
   // Retrieve details from localStorage (or fallback to mockup data)
-  const fullName = localStorage.getItem("reg_fullName");
-  const phone = localStorage.getItem("reg_phone");
-  const ward = localStorage.getItem("reg_ward");
-  const address = localStorage.getItem("reg_address");
-  const district = localStorage.getItem("reg_district");
-  const aadhar = localStorage.getItem("reg_aadhar");
-  const employee = localStorage.getItem("reg_employee");
-  const experience = localStorage.getItem("reg_experience");
-  const rawDate = localStorage.getItem("reg_trainingDate") || "2025-06-20";
+  const getDisplayValue = (val: string | null) => {
+    if (!val || val === "null" || val === "undefined") return "";
+    return val;
+  };
+
+  const fullName = getDisplayValue(localStorage.getItem("reg_fullName"));
+  const phone = getDisplayValue(localStorage.getItem("reg_phone"));
+  const ward = getDisplayValue(localStorage.getItem("reg_ward"));
+  const address = getDisplayValue(localStorage.getItem("reg_address"));
+  const district = getDisplayValue(localStorage.getItem("reg_district"));
+  const aadhar = getDisplayValue(localStorage.getItem("reg_aadhar"));
+  const employee = getDisplayValue(localStorage.getItem("reg_employee"));
+  const experience = getDisplayValue(localStorage.getItem("reg_experience"));
+  const rawDate = getDisplayValue(localStorage.getItem("reg_trainingDate"));
 
   // Format YYYY-MM-DD to Tamil format: "DD Month YYYY"
   const formatDateTamil = (dateStr: string) => {

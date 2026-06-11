@@ -9,15 +9,15 @@ export const IphoneMiniWrapperSection = (): JSX.Element => {
     const navigate = useNavigate();
     // Form field data
     const formFields = [
-        { label: 'முழு பெயர் *', id: 'fullName' },
-        { label: 'தொலைபேசி எண் * (whatsapp)', id: 'phone' },
-        { label: 'தொகுதி*', id: 'ward' },
-        { label: 'முகவரி *', id: 'address' },
-        { label: 'மாவட்டம் *', id: 'district' },
-        { label: 'ஆதார் எண் *', id: 'aadharNumber' },
+        { label: 'முழு பெயர்', id: 'fullName' },
+        { label: 'தொலைபேசி எண் (whatsapp)', id: 'phone' },
+        { label: 'தொகுதி', id: 'ward' },
+        { label: 'முகவரி', id: 'address' },
+        { label: 'மாவட்டம்', id: 'district' },
+        { label: 'ஆதார் எண்', id: 'aadharNumber' },
         { label: 'ஆதார் புகைப்படம்', id: 'aadharImage' },
-        { label: 'தொழில்*', id: 'employee' },
-        { label: 'பயிற்சி தேதி *', id: 'trainingDate', isDate: true },
+        { label: 'தொழில்', id: 'employee' },
+        { label: 'பயிற்சி தேதி', id: 'trainingDate', isDate: true },
     ];
 
     // Form states
@@ -30,7 +30,7 @@ export const IphoneMiniWrapperSection = (): JSX.Element => {
         aadharNumber: '',
         aadharImage: '',
         employee: '',
-        exportExperience: '',
+        exportExperience: 'yes',
         trainingDate: '',
     });
     const [errors, setErrors] = React.useState<Record<string, string>>({});
@@ -88,28 +88,6 @@ export const IphoneMiniWrapperSection = (): JSX.Element => {
     ];
 
     const handleSubmit = () => {
-        const newErrors: Record<string, string> = {};
-
-        if (!formData.fullName.trim()) newErrors.fullName = 'தயவுசெய்து முழு பெயரை உள்ளிடவும்';
-        if (!formData.phone.trim()) newErrors.phone = 'தயவுசெய்து தொலைபேசி எண்ணை உள்ளிடவும்';
-        if (!formData.ward.trim()) newErrors.ward = 'தயவுசெய்து தொகுதியை உள்ளிடவும்';
-        if (!formData.address.trim()) newErrors.address = 'தயவுசெய்து முகவரியை உள்ளிடவும்';
-        if (!formData.district.trim()) newErrors.district = 'தயவுசெய்து மாவட்டத்தை உள்ளிடவும்';
-        if (!formData.aadharNumber.trim()) newErrors.aadharNumber = 'தயவுசெய்து ஆதார் எண்ணை உள்ளிடவும்';
-        if (!formData.employee.trim()) newErrors.employee = 'தயவுசெய்து தொழில் விவரத்தை உள்ளிடவும்';
-        if (!formData.exportExperience) newErrors.exportExperience = 'தயவுசெய்து அனுபவம் பற்றிய விவரத்தை தேர்ந்தெடுக்கவும்';
-        if (!formData.trainingDate) newErrors.trainingDate = 'தயவுசெய்து பயிற்சி தேதியை தேர்ந்தெடுக்கவும்';
-
-        if (Object.keys(newErrors).length > 0) {
-            setErrors(newErrors);
-            const firstErrorField = Object.keys(newErrors)[0];
-            const element = document.getElementById(firstErrorField);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }
-            return;
-        }
-
         const exportExperienceText = formData.exportExperience === 'yes' ? 'ஆம்' : 'இல்லை';
 
         localStorage.setItem('reg_fullName', formData.fullName);
@@ -199,7 +177,7 @@ export const IphoneMiniWrapperSection = (): JSX.Element => {
                             </div>
                         ))}
                         <div className="font-medium text-base lg:text-lg leading-[35px] text-[#1a1a1a] [font-family:'Inter',Helvetica] tracking-[0]">
-                            ஏற்றுமதியில் அனுபவம் உள்ளதா? *
+                            ஏற்றுமதியில் அனுபவம் உள்ளதா?
                         </div>
                         <div className='flex items-center gap-6 mt-2'>
                             <label className='flex items-center gap-2 text-base lg:text-lg text-[#1a1a1a] font-medium'>
