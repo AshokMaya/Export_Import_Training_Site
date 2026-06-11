@@ -15,9 +15,41 @@ export const IphoneMiniWrapperSection = (): JSX.Element => {
         { label: 'முகவரி *', id: 'address' },
         { label: 'மாவட்டம் *', id: 'district' },
         { label: 'ஆதார் எண் *', id: 'aadharNumber' },
-        { label: 'ஆதார் புகைப்படம்*', id: 'aadharImage' },
+        { label: 'ஆதார் புகைப்படம்', id: 'aadharImage' },
         { label: 'தொழில்*', id: 'employee' },
+        { label: 'பயிற்சி தேதி *', id: 'trainingDate', isDate: true },
     ];
+
+    // Form states
+    const [formData, setFormData] = React.useState({
+        fullName: '',
+        phone: '',
+        ward: '',
+        address: '',
+        district: '',
+        aadharNumber: '',
+        aadharImage: '',
+        employee: '',
+        exportExperience: '',
+        trainingDate: '',
+    });
+    const [errors, setErrors] = React.useState<Record<string, string>>({});
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { id, value } = e.target;
+        setFormData(prev => ({ ...prev, [id]: value }));
+        if (errors[id]) {
+            setErrors(prev => ({ ...prev, [id]: '' }));
+        }
+    };
+
+    const handleRadioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({ ...prev, [name]: value }));
+        if (errors[name]) {
+            setErrors(prev => ({ ...prev, [name]: '' }));
+        }
+    };
 
     // Schedule timeline data
     const scheduleItems = [
@@ -54,6 +86,44 @@ export const IphoneMiniWrapperSection = (): JSX.Element => {
             description: 'கேள்வி பதில் அமர்வு மற்றும் நிறைவு',
         },
     ];
+
+    const handleSubmit = () => {
+        const newErrors: Record<string, string> = {};
+
+        if (!formData.fullName.trim()) newErrors.fullName = 'தயவுசெய்து முழு பெயரை உள்ளிடவும்';
+        if (!formData.phone.trim()) newErrors.phone = 'தயவுசெய்து தொலைபேசி எண்ணை உள்ளிடவும்';
+        if (!formData.ward.trim()) newErrors.ward = 'தயவுசெய்து தொகுதியை உள்ளிடவும்';
+        if (!formData.address.trim()) newErrors.address = 'தயவுசெய்து முகவரியை உள்ளிடவும்';
+        if (!formData.district.trim()) newErrors.district = 'தயவுசெய்து மாவட்டத்தை உள்ளிடவும்';
+        if (!formData.aadharNumber.trim()) newErrors.aadharNumber = 'தயவுசெய்து ஆதார் எண்ணை உள்ளிடவும்';
+        if (!formData.employee.trim()) newErrors.employee = 'தயவுசெய்து தொழில் விவரத்தை உள்ளிடவும்';
+        if (!formData.exportExperience) newErrors.exportExperience = 'தயவுசெய்து அனுபவம் பற்றிய விவரத்தை தேர்ந்தெடுக்கவும்';
+        if (!formData.trainingDate) newErrors.trainingDate = 'தயவுசெய்து பயிற்சி தேதியை தேர்ந்தெடுக்கவும்';
+
+        if (Object.keys(newErrors).length > 0) {
+            setErrors(newErrors);
+            const firstErrorField = Object.keys(newErrors)[0];
+            const element = document.getElementById(firstErrorField);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            return;
+        }
+
+        const exportExperienceText = formData.exportExperience === 'yes' ? 'ஆம்' : 'இல்லை';
+
+        localStorage.setItem('reg_fullName', formData.fullName);
+        localStorage.setItem('reg_phone', formData.phone);
+        localStorage.setItem('reg_ward', formData.ward);
+        localStorage.setItem('reg_address', formData.address);
+        localStorage.setItem('reg_district', formData.district);
+        localStorage.setItem('reg_aadhar', formData.aadharNumber);
+        localStorage.setItem('reg_employee', formData.employee);
+        localStorage.setItem('reg_experience', exportExperienceText);
+        localStorage.setItem('reg_trainingDate', formData.trainingDate);
+
+        navigate('/payment');
+    };
 
     return (
         <div className='px-6 flex flex-col lg:flex-row gap-14 my-10 p-6 md:p-10'>
@@ -105,11 +175,27 @@ export const IphoneMiniWrapperSection = (): JSX.Element => {
                                     className="font-medium text-base lg:text-lg leading-[35px] text-[#1a1a1a] [font-family:'Inter',Helvetica] tracking-[0]">
                                     {field.label}
                                 </label>
-                                <Input
-                                    id={field.id}
-                                    className='h-8 sm:h-9 bg-[#fad3a7] rounded-[7px] border-none'
-                                    required
-                                />
+                                {field.isDate ? (
+                                    <Input
+                                        id={field.id}
+                                        type="date"
+                                        className='h-8 sm:h-9 bg-[#fad3a7] rounded-[7px] border-none text-black font-medium text-sm sm:text-base outline-none focus:ring-2 focus:ring-[#da612b] px-2'
+                                        value={formData[field.id as keyof typeof formData] || ''}
+                                        onChange={handleChange}
+                                    />
+                                ) : (
+                                    <Input
+                                        id={field.id}
+                                        className='h-8 sm:h-9 bg-[#fad3a7] rounded-[7px] border-none'
+                                        value={formData[field.id as keyof typeof formData] || ''}
+                                        onChange={handleChange}
+                                    />
+                                )}
+                                {errors[field.id] && (
+                                    <span className="text-red-600 text-xs sm:text-sm font-semibold mt-0.5">
+                                        {errors[field.id]}
+                                    </span>
+                                )}
                             </div>
                         ))}
                         <div className="font-medium text-base lg:text-lg leading-[35px] text-[#1a1a1a] [font-family:'Inter',Helvetica] tracking-[0]">
@@ -121,8 +207,9 @@ export const IphoneMiniWrapperSection = (): JSX.Element => {
                                     type='radio'
                                     name='exportExperience'
                                     value='yes'
+                                    checked={formData.exportExperience === 'yes'}
+                                    onChange={handleRadioChange}
                                     className='accent-[#000000] w-4 h-4'
-                                    required
                                 />
                                 ஆம்
                             </label>
@@ -132,14 +219,20 @@ export const IphoneMiniWrapperSection = (): JSX.Element => {
                                     type='radio'
                                     name='exportExperience'
                                     value='no'
+                                    checked={formData.exportExperience === 'no'}
+                                    onChange={handleRadioChange}
                                     className='accent-[#000000] w-4 h-4'
-                                    required
                                 />
                                 இல்லை
                             </label>
                         </div>
+                        {errors.exportExperience && (
+                            <span className="text-red-600 text-xs sm:text-sm font-semibold mt-1">
+                                {errors.exportExperience}
+                            </span>
+                        )}
                         <Button 
-                            onClick={() => navigate('/payment')}
+                            onClick={handleSubmit}
                             className="w-full h-10 sm:h-12 mt-3 sm:mt-4 bg-[#da612b] hover:bg-[#c55525] rounded-[10px] font-extrabold text-xs text-white [font-family:'Inter',Helvetica]"
                         >
                             Submit

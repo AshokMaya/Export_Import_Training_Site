@@ -32,7 +32,7 @@ const infoCards = [
         id: 1,
         title: 'அனைத்து தொகுதிகளிலும்',
         description:
-            'தமிழகத்தில் உள்ள அனைத்து  தொகுதிகளிலும் உள்ள மகளிரை, ஏற்றுமதி-இறக்குமதி வணிக வாய்ப்புகளில் பயிற்சி அளிப்பதின் மூலம் தமிழ்நாடு அரசின் புரட்சிகர முன்முயற்சி. ',
+            'தமிழகத்தில் உள்ள அனைத்து தொகுதிகளிலும், ஏற்றுமதி-இறக்குமதி வணிக வாய்ப்புகளில் பயிற்சி அளிப்பதின் மூலம் தமிழ்நாடு அரசின் புரட்சிகர முன்முயற்சி. ',
         imageSrc: '/group-1.png',
         hasNumberHighlight: true,
         number: '234',
@@ -48,7 +48,7 @@ const infoCards = [
         id: 3,
         title: 'நிபுணர் பயிற்சி',
         description:
-            'தொழில் நிபுணர்கள் மற்றும் வல்லுனர்களிடமிருந்து கற்றுக்கொள்ளுங்கள். இந்த மறுமலர்ச்சி பயணத்தில் இலட்சக்கண்கான பெண் தொழில்முனைவோரை உருவாக்குவது.',
+            'தொழில் நிபுணர்கள் மற்றும் வல்லுனர்களிடமிருந்து கற்றுக்கொள்ளுங்கள். இந்த மறுமலர்ச்சி பயணத்தில் இலட்சக்கண்கான தொழில்முனைவோரை உருவாக்குவது.',
         imageSrc: '/group-2.png',
     },
 ];
@@ -94,13 +94,13 @@ export const IphoneMiniSection = (): JSX.Element => {
                                 className='w-full bg-white rounded-xl overflow-hidden border border-solid border-[#da612b29] lg:max-w-[600px]'>
                                 <CardContent className='p-0 relative'>
                                     {card.hasNumberHighlight ? (
-                                        <div className=' max-w-[78%] top-0 right-0 h-full'>
+                                        <div className='absolute top-0 bottom-0 right-0 w-[28%] h-full overflow-hidden'>
                                             <img
-                                                className='absolute top-0 bottom-0 -right-8 h-full'
+                                                className='absolute top-0 bottom-0 -right-8 h-full object-cover'
                                                 alt='Group'
                                                 src={card.imageSrc}
                                             />
-                                            <div className='absolute top-0 bottom-0 right-5 font-bold text-[#da612b] text-[36px] sm:text-[43.2px] whitespace-nowrap font-inter'>
+                                            <div className='absolute top-0 bottom-0 right-2 sm:right-5 font-bold text-[#da612b] text-2xl sm:text-[36px] lg:text-[43.2px] whitespace-nowrap font-inter'>
                                                 <div className='h-full flex justify-center items-center'>
                                                     {card.number}
                                                 </div>
@@ -109,14 +109,14 @@ export const IphoneMiniSection = (): JSX.Element => {
                                     ) : (
                                         <img
                                             className={clsx(
-                                                ' absolute right-2 bottom-1 object-cover'
+                                                'absolute right-2 bottom-1 w-12 h-12 sm:w-16 sm:h-16 object-contain'
                                             )}
                                             alt='Group'
                                             src={card.imageSrc}
                                         />
                                     )}
 
-                                    <div className='flex flex-col max-w-[78%] items-start gap-1 px-3 pt-3 pb-4 sm:px-3.5 sm:pt-3.5'>
+                                    <div className='flex flex-col max-w-[72%] sm:max-w-[78%] items-start gap-1 px-3 pt-3 pb-4 sm:px-3.5 sm:pt-3.5'>
                                         <div className='font-bold text-[#1a1a1a] text-base lg:text-lg leading-norma font-inter'>
                                             {card.title}
                                         </div>
@@ -131,11 +131,11 @@ export const IphoneMiniSection = (): JSX.Element => {
                         <Card className='bg-white rounded-xl border border-solid border-[#da612b29] w-full p-4 lg:max-w-[600px]'>
                             <div className='font-medium text-[#1a1a1a] text-base lg:text-lg font-inter break-words leading-normal'>
                                 &#34;இந்த விரிவான ஏற்றுமதி-இறக்குமதி பயிற்சி
-                                திட்டம் மூலம் தமிழ்நாடு முழுவதும் பெண்
+                                திட்டம் மூலம் தமிழ்நாடு முழுவதும்
                                 தொழில்முனைவோர்களை உருவாக்கி, வலுப்படுத்த நாங்கள்
                                 உறுதிபூண்டுள்ளோம்.&#34;
                             </div>
-                            <div className="mt-2 font-bold text-[#1a1a1a] text-sm lg:text-lg leading-5 whitespace-nowrap [font-family:'Inter',Helvetica] tracking-[0] text-right">
+                            <div className="mt-2 font-bold text-[#1a1a1a] text-sm lg:text-lg leading-5 whitespace-normal [font-family:'Inter',Helvetica] tracking-[0] text-right">
                                 - மாண்புமிகு தமிழ்நாடு முதலமைச்சர்
                             </div>
                         </Card>

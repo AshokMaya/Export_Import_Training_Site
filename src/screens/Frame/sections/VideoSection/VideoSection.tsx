@@ -110,16 +110,18 @@ export const VideoSection = ({
           src="/home-banner.jpg"
           alt="homeBanner"
         />
-        <img
-          className="bottom-10 absolute left-5 max-h-80 z-20"
-          src="/joseph-vijay-1.png"
-          alt="joseph-vijay"
-        />
-        <img
-          className="bottom-10 absolute right-5 max-h-80 z-20"
-          src="/image-5.png"
-          alt="embelem"
-        />
+        <div className="absolute bottom-0 left-0 right-0 w-full flex justify-between items-end px-6 pointer-events-none select-none z-20 h-[520px]">
+          <img
+            className="h-full object-contain object-bottom"
+            src="/joseph-vijay-2.png"
+            alt="joseph-vijay"
+          />
+          <img
+            className="h-[55%] object-contain object-bottom"
+            src="/image-5.png"
+            alt="embelem"
+          />
+        </div>
       </div>
     </>
   );
