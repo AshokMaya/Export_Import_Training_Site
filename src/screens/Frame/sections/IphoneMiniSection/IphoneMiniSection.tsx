@@ -32,7 +32,7 @@ const infoCards = [
         id: 1,
         title: 'அனைத்து தொகுதிகளிலும்',
         description:
-            'தமிழகத்தில் உள்ள அனைத்து தொகுதிகளிலும், ஏற்றுமதி-இறக்குமதி வணிக வாய்ப்புகளில் பயிற்சி அளிப்பதின் மூலம் தமிழ்நாடு அரசின் புரட்சிகர முன்முயற்சி. ',
+            'தமிழகத்தில் உள்ள அனைத்து தொகுதிகளிலும் உள்ள மகளிரை, ஏற்றுமதி-இறக்குமதி வணிக வாய்ப்புகளில் பயிற்சி அளிப்பதின் மூலம் தமிழ்நாடு அரசின் புரட்சிகர முன்முயற்சி.',
         imageSrc: '/group-1.png',
         hasNumberHighlight: true,
         number: '234',
@@ -94,16 +94,14 @@ export const IphoneMiniSection = (): JSX.Element => {
                                 className='w-full bg-white rounded-xl overflow-hidden border border-solid border-[#da612b29] lg:max-w-[600px]'>
                                 <CardContent className='p-0 relative'>
                                     {card.hasNumberHighlight ? (
-                                        <div className='absolute top-0 bottom-0 right-0 w-[28%] h-full overflow-hidden'>
+                                        <div className='absolute top-0 bottom-0 right-0 w-[40%] h-full overflow-hidden flex items-center justify-center'>
                                             <img
-                                                className='absolute top-0 bottom-0 -right-8 h-full object-cover'
+                                                className='absolute top-0 bottom-0 right-0 w-full h-full object-contain'
                                                 alt='Group'
                                                 src={card.imageSrc}
                                             />
-                                            <div className='absolute top-0 bottom-0 right-2 sm:right-5 font-bold text-[#da612b] text-2xl sm:text-[36px] lg:text-[43.2px] whitespace-nowrap font-inter'>
-                                                <div className='h-full flex justify-center items-center'>
-                                                    {card.number}
-                                                </div>
+                                            <div className='relative font-bold text-[#da612b] text-2xl sm:text-[36px] lg:text-[43.2px] whitespace-nowrap font-inter z-10'>
+                                                {card.number}
                                             </div>
                                         </div>
                                     ) : (
@@ -116,7 +114,7 @@ export const IphoneMiniSection = (): JSX.Element => {
                                         />
                                     )}
 
-                                    <div className='flex flex-col max-w-[72%] sm:max-w-[78%] items-start gap-1 px-3 pt-3 pb-4 sm:px-3.5 sm:pt-3.5'>
+                                    <div className='flex flex-col max-w-[62%] sm:max-w-[70%] items-start gap-1 px-3 pt-3 pb-4 sm:px-3.5 sm:pt-3.5'>
                                         <div className='font-bold text-[#1a1a1a] text-base lg:text-lg leading-norma font-inter'>
                                             {card.title}
                                         </div>
