@@ -70,14 +70,20 @@ export default function DownloadHallTicket(): JSX.Element {
         const link = document.createElement("a");
         link.download = filename;
         link.href = URL.createObjectURL(blob);
+        link.style.display = "none";
+        document.body.appendChild(link);
         link.click();
-        setTimeout(() => URL.revokeObjectURL(link.href), 100);
+        document.body.removeChild(link);
+        setTimeout(() => URL.revokeObjectURL(link.href), 10000);
       } else {
         // Android and Web desktop: Original direct base64 download method
         const link = document.createElement("a");
         link.download = filename;
         link.href = imageData;
+        link.style.display = "none";
+        document.body.appendChild(link);
         link.click();
+        document.body.removeChild(link);
       }
     } catch (error) {
       console.error("Error capturing the ticket image:", error);
