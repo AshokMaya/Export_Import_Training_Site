@@ -82,26 +82,18 @@ export const VideoSection = ({
             <p className="text-white text-2xl font-bold text-center mt-5">
               (முதலமைச்சரின் வீட்டுக்கு ஒரு தொழிலதிபர் திட்டம்)
             </p>
-            <div className="flex justify-center mt-10">
-              <Button
-                onClick={() => {
-                  const element = document.getElementById("zoho-form-section");
-                  if (element) {
-                    const yOffset = -56; // Negative offset
-                    const y =
-                      element.getBoundingClientRect().top +
-                      window.pageYOffset +
-                      yOffset;
-                    window.scrollTo({
-                      top: y,
-                      behavior: "smooth",
-                    });
-                  }
-                }}
-                className="w-fit h-10 sm:h-12 bg-[#da612b] hover:bg-[#c55625] rounded-[10px] font-extrabold text-base lg:text-lg text-white [font-family:'Inter',Helvetica]"
-              >
-                இப்போதே பதிவு செய்யுங்கள்
-              </Button>
+            <div className="flex flex-col items-center gap-3 mt-8">
+              <span className="text-[#a3e635] font-extrabold text-xl md:text-2xl text-center tracking-wide">
+                பதிவு செய்ய ஸ்கேன் செய்யுங்கள்
+              </span>
+              <img 
+                src="/qr_code.jpeg" 
+                alt="QR Code" 
+                className="w-36 h-36 rounded-md object-contain shadow-2xl"
+              />
+              <span className="text-[#a3e635] font-bold text-base md:text-lg text-center tracking-wider">
+                https://export-training.netlify.app/
+              </span>
             </div>
           </div>
         </div>
