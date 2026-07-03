@@ -19,8 +19,8 @@ export const VideoSection = ({
           <div className="relative w-full">
             <img
               className="w-full h-[400px] sm:h-[500px] md:h-[665px] object-cover"
-              alt="Freepik the style is"
-              src="/Slide 4_3 - 1.png"
+              alt="Joseph Vijay Mobile"
+              src="/vijay_mobile.jpeg"
             />
 
             <div className=" inset-0 rounded-t-xl [background:rgba(255,255,255,1)]">
